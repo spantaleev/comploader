@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+	<head></head>
+	<body>
+		Date: <input id="js-date-picker" />
+
+		<script type="text/javascript" src="../comploader.js"></script>
+
+		<!-- Define the components -->
+		<script type="text/javascript">
+			comploader.register("jquery", {
+				"scripts": [
+					"http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"
+				]
+			});
+
+			comploader.register("jqueryui", {
+				"requires": ["jquery"],
+				"stylesheets": [
+					"http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/css/lightness/jquery-ui-1.10.2.custom.min.css"
+				],
+				"scripts": [
+					"http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"
+				]
+			});
+		</script>
+
+		<!-- Make use of the components -->
+		<script type="text/javascript">
+			comploader.load("jqueryui", function () {
+				//Both jQuery and jQuery UI are now loaded.
+				$('#js-date-picker').datepicker();
+			});
+		</script>
+	</body>
+</html>
+

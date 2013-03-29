@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+	<head></head>
+	<body>
+		<p style="color: red;">
+			The text color should change from <strong>red</strong> to <strong>green</strong>
+			when the jQuery component gets loaded.
+
+			<br /><br />
+
+			If you only see it being green, it means jQuery is loading too fast.
+		</p>
+
+		<script type="text/javascript" src="../comploader.js"></script>
+
+		<!-- Define the components (only got one here) -->
+		<script type="text/javascript">
+			comploader.register("jquery", {
+				"scripts": [
+					"http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"
+				]
+			});
+		</script>
+
+		<!-- Make use of the components -->
+		<script type="text/javascript">
+			comploader.load("jquery", function () {
+				//jQuery is now loaded - use it now.
+				$('p').css('color', 'green');
+			});
+		</script>
+	</body>
+</html>
