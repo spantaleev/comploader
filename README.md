@@ -89,7 +89,7 @@ To summarize:
  * RequireJS is a pain to use (in general) - just [read about it](http://www.requirejs.org/)
  * RequireJS is a pain to use (for loading libraries lacking AMD support)
  * RequireJS does not handle loading of CSS files
- * RequireJS is huge and complex compared to comploader (81KB vs 3KB)
+ * RequireJS is huge and complex compared to comploader (81KB vs 4KB)
 
 
 How do I later minify/combine some of my components?

@@ -59,7 +59,21 @@
 				} else {
 					var script = document.createElement('script');
 					script.src = url;
-					script.onload = onScriptLoad;
+
+					if (script.readyState) {
+						//IE
+						var onReadyStateChange = function () {
+							//The same IE version may randomly fire "complete" or "loaded".
+							if (script.readyState === 'complete' || script.readyState === 'loaded') {
+								onScriptLoad();
+							}
+						};
+						script.attachEvent('onreadystatechange', onReadyStateChange);
+					} else {
+						//Real browsers
+						script.onload = onScriptLoad;
+					}
+
 					addToHead(script);
 				}
 			};
