@@ -1,4 +1,4 @@
-/** comploader 1.1 - BSD licensed - https://github.com/spantaleev/comploader **/
+/** comploader 1.2 - BSD licensed - https://github.com/spantaleev/comploader **/
 
 (function () {
 	var registeredComponents = {},
@@ -139,6 +139,10 @@
 			"stylesheets": []
 		};
 		registeredComponents[name] = objectsMerge([baseConfig, configuration, {"name": name}]);
+	};
+
+	comploader.getConfiguration = function (name) {
+		return (name in registeredComponents ? registeredComponents[name] : null);
 	};
 
 	comploader.load = function (components, callback) {
