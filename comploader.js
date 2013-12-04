@@ -114,6 +114,8 @@
 			componentWaiters[name] = [callback];
 
 			var onLoaded = function () {
+				loadedComponents[name] = true;
+
 				//Execute all waiter callbacks.
 				//Some more may have been queued since we started.
 				for (var idx in componentWaiters[name]) {
