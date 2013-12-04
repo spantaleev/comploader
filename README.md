@@ -72,6 +72,33 @@ Tell comploader about the dependency and it will load components in the correct 
 	</script>
 
 
+What about Subresource Integrity?
+---------------------------------
+
+comploader supports [Subresource Integrity](http://www.w3.org/TR/SRI/) to guarantee
+that loaded resources haven't been tampered with
+in [browsers that support it](http://caniuse.com/#search=SRI)).
+
+To use, just define your components like this:
+
+	<script type="text/javascript">
+		comploader.register("jquery", {
+			"scripts": [
+				{
+					"url": "https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js",
+					"integrity": "sha384-6ePHh72Rl3hKio4HiJ841psfsRJveeS+aLoaEf3BWfS+gTF0XdAqku2ka8VddikM"
+				}
+			]
+		});
+	</script>
+
+This works for both scripts and stylesheets.
+
+Generating the integrity digest hashes can be done like this:
+
+	cat some-file.js | openssl dgst -sha384 -binary | openssl base64 -A
+
+
 How is this different than RequireJS?
 -------------------------------------
 

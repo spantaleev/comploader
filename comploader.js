@@ -1,4 +1,4 @@
-/** comploader 1.3 - BSD licensed - https://github.com/spantaleev/comploader **/
+/** comploader 1.4 - BSD licensed - https://github.com/spantaleev/comploader **/
 
 (function () {
 	var registeredComponents = {},
@@ -15,19 +15,27 @@
 
 		loadStylesheets = function (stylesheets) {
 			for (var idx in stylesheets) {
-				var url = stylesheets[idx];
+				var styleSheetInfo = stylesheets[idx];
+				if (typeof(styleSheetInfo) === 'string') {
+					styleSheetInfo = {"url": styleSheetInfo};
+				}
 
-				if (url in loadedResources) {
+				if (styleSheetInfo.url in loadedResources) {
 					return;
 				}
 
 				var link = document.createElement('link');
 				link.rel = "stylesheet";
 				link.type = "text/css";
-				link.href = url;
+				link.href = styleSheetInfo.url;
+				if (styleSheetInfo.integrity) {
+					link.integrity = styleSheetInfo.integrity;
+				}
+				link.crossOrigin = (styleSheetInfo.crossOrigin ? styleSheetInfo.crossOrigin : 'anonymous');
+
 				addToHead(link);
 
-				loadedResources[url] = true;
+				loadedResources[styleSheetInfo.url] = true;
 			}
 		},
 
@@ -37,10 +45,18 @@
 				return;
 			}
 
+			for (var idx in scripts) {
+				var scriptInfo = scripts[idx];
+				if (typeof(scriptInfo) === 'string') {
+					scriptInfo = {"url": scriptInfo};
+				}
+				scripts[idx] = scriptInfo;
+			}
+
 			var currentIdx = 0;
 
 			var onScriptLoad = function () {
-				loadedResources[scripts[currentIdx - 1]] = true;
+				loadedResources[scripts[currentIdx - 1].url] = true;
 
 				if (currentIdx === scripts.length) {
 					callback();
@@ -50,15 +66,19 @@
 			};
 
 			var loadNext = function () {
-				var url = scripts[currentIdx];
+				var scriptInfo = scripts[currentIdx];
 
 				currentIdx += 1;
 
-				if (url in loadedResources) {
+				if (scriptInfo.url in loadedResources) {
 					onScriptLoad();
 				} else {
 					var script = document.createElement('script');
-					script.src = url;
+					script.src = scriptInfo.url;
+					if (scriptInfo.integrity) {
+						script.integrity = scriptInfo.integrity;
+					}
+					script.crossOrigin = (scriptInfo.crossOrigin ? scriptInfo.crossOrigin : 'anonymous');
 
 					if (script.readyState) {
 						//IE
