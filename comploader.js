@@ -1,4 +1,4 @@
-/** comploader 1.2 - BSD licensed - https://github.com/spantaleev/comploader **/
+/** comploader 1.3 - BSD licensed - https://github.com/spantaleev/comploader **/
 
 (function () {
 	var registeredComponents = {},
@@ -113,8 +113,12 @@
 
 			componentWaiters[name] = [callback];
 
+			var configuration = registeredComponents[name];
+
 			var onLoaded = function () {
 				loadedComponents[name] = true;
+
+				configuration.init();
 
 				//Execute all waiter callbacks.
 				//Some more may have been queued since we started.
@@ -123,8 +127,6 @@
 				}
 				delete componentWaiters[name];
 			};
-
-			var configuration = registeredComponents[name];
 
 			comploader.load(configuration.requires, function () {
 				loadStylesheets(configuration.stylesheets);
@@ -138,7 +140,8 @@
 		var baseConfig = {
 			"requires": [],
 			"scripts": [],
-			"stylesheets": []
+			"stylesheets": [],
+			"init": function () { }
 		};
 		registeredComponents[name] = objectsMerge([baseConfig, configuration, {"name": name}]);
 	};

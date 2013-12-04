@@ -21,7 +21,10 @@
 				],
 				"scripts": [
 					"http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"
-				]
+				],
+				"init": function () {
+					//The component is now loaded. We can initialize it here, if needed.
+				}
 			});
 		</script>
 
@@ -29,6 +32,8 @@
 		<script type="text/javascript">
 			comploader.load("jqueryui", function () {
 				//Both jQuery and jQuery UI are now loaded.
+				//The "init" function for the "jqueryui" component definition
+				//has also been executed already.
 				$('#js-date-picker').datepicker();
 			});
 		</script>
