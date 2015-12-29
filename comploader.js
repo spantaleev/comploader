@@ -1,4 +1,4 @@
-/** comploader 1.4 - BSD licensed - https://github.com/spantaleev/comploader **/
+/** comploader 1.4.1 - BSD licensed - https://github.com/spantaleev/comploader **/
 
 (function () {
 	var registeredComponents = {},
@@ -30,8 +30,14 @@
 				link.href = styleSheetInfo.url;
 				if (styleSheetInfo.integrity) {
 					link.integrity = styleSheetInfo.integrity;
+					//SRI requires crossOrigin for non-same-origin URIs.
+					if (!styleSheetInfo.crossOrigin) {
+						styleSheetInfo.crossOrigin = 'anonymous';
+					}
 				}
-				link.crossOrigin = (styleSheetInfo.crossOrigin ? styleSheetInfo.crossOrigin : 'anonymous');
+				if (styleSheetInfo.crossOrigin) {
+					link.crossOrigin = styleSheetInfo.crossOrigin;
+				}
 
 				addToHead(link);
 
@@ -77,8 +83,14 @@
 					script.src = scriptInfo.url;
 					if (scriptInfo.integrity) {
 						script.integrity = scriptInfo.integrity;
+						//SRI requires crossOrigin for non-same-origin URIs.
+						if (!scriptInfo.crossOrigin) {
+							scriptInfo.crossOrigin = 'anonymous';
+						}
 					}
-					script.crossOrigin = (scriptInfo.crossOrigin ? scriptInfo.crossOrigin : 'anonymous');
+					if (scriptInfo.crossOrigin) {
+						script.crossOrigin = scriptInfo.crossOrigin;
+					}
 
 					if (script.readyState) {
 						//IE
