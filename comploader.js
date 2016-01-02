@@ -1,4 +1,4 @@
-/** comploader 1.4.1 - BSD licensed - https://github.com/spantaleev/comploader **/
+/** comploader 1.5 - BSD licensed - https://github.com/spantaleev/comploader **/
 
 (function () {
 	var registeredComponents = {},
@@ -198,19 +198,13 @@
 
 		var loadedCount = 0;
 
-		var onComponentLoad = function () {
-			loadedCount += 1;
-			if (components.length === loadedCount) {
-				callback();
-			} else {
-				loadNext();
-			}
-		};
-
-		var loadNext = function () {
-			loadComponent(components[loadedCount], onComponentLoad);
-		};
-
-		loadNext();
+		for (var idx in components) {
+			loadComponent(components[idx], function () {
+				loadedCount += 1;
+				if (components.length === loadedCount) {
+					callback();
+				}
+			});
+		}
 	};
 })();
