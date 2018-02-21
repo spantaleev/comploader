@@ -1,0 +1,21 @@
+{
+	"name": "comploader",
+	"version": "1.5.0",
+	"description": "Web component loader for sane/practical people.",
+	"keywords": [
+		"comploader",
+		"lazyload",
+		"loader"
+	],
+	"homepage": "https://github.com/spantaleev/comploader",
+	"bugs": "https://github.com/spantaleev/comploader/issues",
+	"license": "BSD-3-Clause",
+	"author": {
+		"name": "Slavi Pantaleev",
+		"email": "slavi@devture.com",
+		"url": "https://devture.com/"
+	},
+	"files": [
+		"comploader.js"
+	]
+}
