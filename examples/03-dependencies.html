@@ -10,20 +10,29 @@
 		<script type="text/javascript">
 			comploader.register("jquery", {
 				"scripts": [
-					"http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"
+					{
+						"url": "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js",
+						"integrity": "sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+					}
 				]
 			});
 
 			comploader.register("jqueryui", {
 				"requires": ["jquery"],
 				"stylesheets": [
-					"http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/css/lightness/jquery-ui-1.10.2.custom.min.css"
+					{
+						"url": "https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/themes/ui-lightness/jquery-ui.min.css",
+						"integrity": "sha512-O0WPNtxBXfcgFT5jhJlj/AgKJvp34XmR6G2oarACNg2c/fX0kpQEBfymY8zrtcu1yvAmiMSTrXN8zXm3i39O1w=="
+					}
 				],
 				"scripts": [
-					"http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"
+					{
+						"url": "https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js",
+						"integrity": "sha512-MSOo1aY+3pXCOCdGAYoBZ6YGI0aragoQsg1mKKBHXCYPIWxamwOE7Drh+N5CPgGI5SA9IEKJiPjdfqWFWmZtRA=="
+					}
 				],
 				"init": function () {
-					//The component is now loaded. We can initialize it here, if needed.
+					// The component is now loaded. We can initialize it here, if needed.
 				}
 			});
 		</script>
@@ -31,12 +40,11 @@
 		<!-- Make use of the components -->
 		<script type="text/javascript">
 			comploader.load("jqueryui", function () {
-				//Both jQuery and jQuery UI are now loaded.
-				//The "init" function for the "jqueryui" component definition
-				//has also been executed already.
+				// Both jQuery and jQuery UI are now loaded.
+				// The "init" function for the "jqueryui" component definition
+				// has also been executed already.
 				$('#js-date-picker').datepicker();
 			});
 		</script>
 	</body>
 </html>
-
