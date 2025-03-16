@@ -1,4 +1,4 @@
-/** comploader 1.5 - BSD licensed - https://github.com/spantaleev/comploader **/
+/** comploader 1.6 - BSD licensed - https://github.com/spantaleev/comploader **/
 
 (function () {
 	var registeredComponents = {},
