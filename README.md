@@ -99,6 +99,26 @@ Generating the integrity digest hashes can be done like this:
 	cat some-file.js | openssl dgst -sha384 -binary | openssl base64 -A
 
 
+Can I load ESM modules?
+-----------------------
+
+Yes, here's an example:
+
+		comploader.register("turbo", {
+			"scripts": [
+				{
+					"url": "https://unpkg.com/@hotwired/turbo@8.0.13/dist/turbo.es2017-esm.js",
+					"type": "module"
+				}
+			]
+		});
+
+		comploader.load('turbo', function () {
+			console.log(window.Turbo);
+		});
+	</script>
+
+
 How is this different than RequireJS?
 -------------------------------------
 

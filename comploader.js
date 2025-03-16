@@ -54,6 +54,9 @@
 			for (var idx in scripts) {
 				var scriptInfo = scripts[idx];
 				if (typeof(scriptInfo) === 'string') {
+					// If the type attribute is not set or is an empty string, or a JavaScript MIME type
+					// indicates that the script is a "classic script", containing JavaScript code.
+					// See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type
 					scriptInfo = {"url": scriptInfo};
 				}
 				scripts[idx] = scriptInfo;
@@ -81,6 +84,9 @@
 				} else {
 					var script = document.createElement('script');
 					script.src = scriptInfo.url;
+					if (scriptInfo.type) {
+						script.type = scriptInfo.type;
+					}
 					if (scriptInfo.integrity) {
 						script.integrity = scriptInfo.integrity;
 						//SRI requires crossOrigin for non-same-origin URIs.
